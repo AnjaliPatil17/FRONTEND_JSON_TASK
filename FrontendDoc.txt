@@ -1,0 +1,168 @@
+-------------------------------------------------------------------------------------------------------------
+                                      Step 1: Create empDB.json file.
+-------------------------------------------------------------------------------------------------------------
+
+{
+  "employees": [
+    {
+      "id": "1",
+      "name": "Pankaj",
+      "salary": "10000"
+    },
+    {
+      "name": "David",
+      "salary": "5000",
+      "id": "2"
+    },
+    {
+      "name": "Lisa",
+      "salary": "8000",
+      "id": "3"
+    }
+  ]
+}
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------
+                                              Step 2: Run JSON Server.
+------------------------------------------------------------------------------------------------------------------
+
+This will create REST API for frontendfile.json
+json-server --watch frontendfile.json
+
+
+$ json-server --watch frontendfile.json
+--watch/-w can be omitted, JSON Server 1+ watches for file changes by default
+JSON Server started on PORT :3000
+Press CTRL-C to stop
+Watching frontendfile.json...
+
+( ˶ˆ ᗜ ˆ˵ )
+
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/employees
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+                                         Step 3: Get all Employees using curl command
+---------------------------------------------------------------------------------------------------------------------
+
+$ curl -X GET -H "Content-Type: application/json" "http://localhost:3000/employees"
+
+
+$ curl -X GET -H "Content-Type: application/json" "http://localhost:3000/employees"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   200  100   200    0     0   5835      0 --:--:-- --:--:-- --:--:--  6060[
+  {
+    "id": "1",
+    "name": "Pankaj",
+    "salary": "10000"
+  },
+  {
+    "name": "David",
+    "salary": "5000",
+    "id": "2"
+  },
+  {
+    "name": "Lisa",
+    "salary": "800",
+    "id": "3"
+  }
+]
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+                                        Step 4: Get Employee Details with id 1
+-------------------------------------------------------------------------------------------------------------------------
+
+curl -X GET -H "Content-Type: application/json" "http://localhost:3000/employees/1"
+
+
+$ curl -X GET -H "Content-Type: application/json" "http://localhost:3000/employees/1"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    56  100    56    0     0   6513      0 --:--:-- --:--:-- --:--:--  7000{
+  "id": "1",
+  "name": "Pankaj",
+  "salary": "10000"
+}
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+                                              Step 5: Adding New Employee Lisa.
+------------------------------------------------------------------------------------------------------------------------------------
+
+ Here you will notice HTTP Method  POST is used as well as using –d option JSON is passed in the Body
+ curl -X PUT -H "Content-Type: application/json" -d '{"name": "Lisa", "salary": "2000"}' "http://localhost:3000/employees/3"
+
+
+$  curl -X PUT -H "Content-Type: application/json" -d '{"name": "Lisa", "salary": "2000"}' "http://localhost:3000/employees/3"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    87  100    53  100    34   2292   1470 --:--:-- --:--:-- --:--:--  3954{
+  "name": "Lisa",
+  "salary": "2000",
+  "id": "3"
+}
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                       Step 6: Update Employee Salary for Lisa to 8000 for id 3 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+curl -XPUT -H "Content-Type: application/json" -d '{"name": "Lisa", "salary": "8000"}' "http://localhost:3000/employees/3"
+
+
+$ curl -XPUT -H "Content-Type: application/json" -d '{"name": "Lisa", "salary": "8000"}' "http://localhost:3000/employees/3"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    87  100    53  100    34   4844   3107 --:--:-- --:--:-- --:--:--  8700{
+  "name": "Lisa",
+  "salary": "8000",
+  "id": "3"
+}
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+                                                Step 7: Delete Employee with Employee Id 2
+------------------------------------------------------------------------------------------------------------------------------------
+
+curl -X DELETE -H "Content-Type: application/json" "http://localhost:3000/employees/2"
+
+
+$ curl -X DELETE -H "Content-Type: application/json" "http://localhost:3000/employees/2"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    54  100    54    0     0    798      0 --:--:-- --:--:-- --:--:--   805{
+  "name": "David",
+  "salary": "5000",
+  "id": "2"
+}
+
